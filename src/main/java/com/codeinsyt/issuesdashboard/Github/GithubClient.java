@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class GithubClient {
@@ -32,6 +34,11 @@ public class GithubClient {
        return this.restTemplate.getForEntity(EVENTS_ISSUES_URL,RepositoryEvent[].class,orgName,repoName);
     }
 
+
+    public List<RepositoryEvent> fetchEventList(String repoName, String orgName){
+        return Arrays.asList(fetchRepositoryEvents(repoName,orgName).getBody());
+
+    }
 
 
 
