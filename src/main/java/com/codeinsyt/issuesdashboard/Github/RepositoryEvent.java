@@ -1,28 +1,33 @@
 package com.codeinsyt.issuesdashboard.Github;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.OffsetDateTime;
 
 public class RepositoryEvent {
 
-     private final Type type;
+    private final Type event;
 
-     private final OffsetDateTime creationTime;
+    private final OffsetDateTime creationTime;
 
-     private final Actor actor;
+    private final Actor actor;
 
-     private final Issue issue;
+    private final Issue issue;
 
 
-    public RepositoryEvent(String type, OffsetDateTime creationTime, Actor actor, Issue issue) {
-        this.type = Type.valueFrom(type);
+    public RepositoryEvent(String event,
+                            OffsetDateTime creationTime,
+                           Actor actor,
+                           Issue issue) {
+        this.event = Type.valueFrom(event);
         this.creationTime = creationTime;
         this.actor = actor;
         this.issue = issue;
     }
 
-
-    public Type getType() {
-        return type;
+    public Type getEvent() {
+        return event;
     }
 
     public OffsetDateTime getCreationTime() {
@@ -36,11 +41,6 @@ public class RepositoryEvent {
     public Issue getIssue() {
         return issue;
     }
-
-
-
-
-
 
     public enum Type {
 
@@ -69,20 +69,20 @@ public class RepositoryEvent {
         HEAD_REF_FORCE_PUSHED("head_ref_force_pushed"),
         BASE_REF_FORCE_PUSHED("base_ref_force_pushed");
 
-        private String type;
+        private String event;
 
-        Type(String type) {
-            this.type = type;
+        Type(String event) {
+            this.event = event;
         }
 
-        static Type valueFrom(String type) {
+        static Type valueFrom(String event) {
             for (Type value : values()) {
-                if (type.equals(value.type)) {
+                if (event.equals(value.event)) {
                     return value;
                 }
             }
             throw new IllegalArgumentException(
-                    "'" + type + "' is not a valid event type");
+                    "'" + event + "' is not a valid event event");
         }
     }
 }
