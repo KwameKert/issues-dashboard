@@ -1,6 +1,7 @@
 package com.codeinsyt.issuesdashboard.events;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -9,6 +10,8 @@ import java.io.Serializable;
  * @author KwameKert
  * created on 01/04/2020
  **/
+
+@Entity
 public class GithubProject  implements Serializable {
 
     @Id
